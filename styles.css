@@ -453,8 +453,8 @@ nav.scrolled {
 
 .shield-outer {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 25%;
+    left: 25%;
     transform: translate(-50%, -50%);
     width: 150px;
     height: 150px;
@@ -1116,4 +1116,8 @@ footer {
     body.js-cursor-active {
         cursor: auto !important;
     }
+}
+
+#message{
+    margin-top: 10px;
 }
