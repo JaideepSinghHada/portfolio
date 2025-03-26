@@ -575,7 +575,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const projectTitle = projectCard.querySelector('h3').textContent;
             
             // Update modal content
-            demoTitle.textContent = `${projectTitle} - Demo`;
+            demoTitle.textContent = `${projectTitle} - Live Demo`;
             
             // Create appropriate demo content based on project
             let demoContent = '';
@@ -583,63 +583,265 @@ document.addEventListener('DOMContentLoaded', function() {
             if (projectTitle.includes('Content Access')) {
                 demoContent = `
                     <div class="demo-terminal">
-                        <div class="demo-line">$ python access_manager.py --auth</div>
+                        <div class="demo-line">python access_manager.py --auth</div>
                         <div class="demo-output">Initializing role-based access control system...</div>
                         <div class="demo-output success">Successfully loaded 50 user profiles</div>
                         <div class="demo-output">Analyzing access patterns...</div>
                         <div class="demo-output success">Reduced unauthorized access attempts by 40%</div>
-                        <div class="demo-line">$ cat access_log.txt</div>
+                        <div class="demo-line">cat access_log.txt</div>
                         <div class="demo-output">[2024-03-12 09:15:23] User admin: Access GRANTED to /admin/console</div>
                         <div class="demo-output">[2024-03-12 09:16:45] User guest: Access DENIED to /admin/console</div>
                         <div class="demo-output">[2024-03-12 09:18:12] User analyst: Access GRANTED to /reports/security</div>
+                        <div class="demo-line">cat /etc/access_stats.log</div>
+                        <div class="demo-output">Total users: 50</div>
+                        <div class="demo-output success">Access reduction: 40%</div>
+                        <div class="demo-output success">Data breach reduction: 30%</div>
                     </div>
                     <p>This project implements a sophisticated role-based access control system that significantly reduced unauthorized access by implementing proper authentication and authorization mechanisms.</p>
                 `;
             } else if (projectTitle.includes('Ethical Hacking')) {
                 demoContent = `
                     <div class="demo-terminal">
-                        <div class="demo-line">$ sudo burpsuite --project ecommerce_pentest</div>
+                        <div class="demo-line">sudo burpsuite --project ecommerce_pentest</div>
                         <div class="demo-output">Starting Burp Suite Professional...</div>
                         <div class="demo-output">Setting target scope to ecommerce.target.com</div>
                         <div class="demo-output warning">Found 15 critical vulnerabilities:</div>
                         <div class="demo-output error">- SQL Injection on /products?id=</div>
                         <div class="demo-output error">- XSS vulnerability in search function</div>
                         <div class="demo-output error">- Insecure direct object references</div>
-                        <div class="demo-line">$ cat recommendations.md</div>
+                        <div class="demo-line">cat recommendations.md</div>
                         <div class="demo-output success">Implemented parameterized queries: Reduced SQL injections by 100%</div>
                         <div class="demo-output success">Added Content Security Policy: Mitigated XSS attacks</div>
                         <div class="demo-output success">Overall security posture improved by 60%</div>
+                        <div class="demo-line">nmap -sV --script=vuln ecommerce.target.com</div>
+                        <div class="demo-output">Starting Nmap scan...</div>
+                        <div class="demo-output">PORT   STATE SERVICE VERSION</div>
+                        <div class="demo-output">22/tcp open  ssh     OpenSSH 7.4</div>
+                        <div class="demo-output">80/tcp open  http    Apache 2.4.6</div>
+                        <div class="demo-output warning">Found 3 potential vulnerabilities</div>
                     </div>
                     <p>This ethical hacking project identified and remediated critical vulnerabilities in an e-commerce platform, significantly enhancing its security posture.</p>
                 `;
             } else if (projectTitle.includes('Anomaly Detection')) {
                 demoContent = `
                     <div class="demo-terminal">
-                        <div class="demo-line">$ python anomaly_detection.py --data network_traffic.pcap</div>
+                        <div class="demo-line">python anomaly_detection.py --data network_traffic.pcap</div>
                         <div class="demo-output">Loading machine learning model...</div>
                         <div class="demo-output">Processing 1.2GB of network traffic...</div>
                         <div class="demo-output warning">Unusual pattern detected: Potential port scan from 192.168.1.105</div>
                         <div class="demo-output error">Anomaly detected: Excessive failed login attempts</div>
                         <div class="demo-output success">Automated response: Blocking source IP 203.0.113.42</div>
-                        <div class="demo-line">$ tail -f /var/log/anomaly_report.log</div>
+                        <div class="demo-line">tail -f /var/log/anomaly_report.log</div>
                         <div class="demo-output">Machine learning model accuracy: 94.8%</div>
                         <div class="demo-output">False positive rate: 1.2%</div>
                         <div class="demo-output success">System successfully identified 98.7% of simulated attack vectors</div>
+                        <div class="demo-line">./visualize_anomalies.sh --type network</div>
+                        <div class="demo-output">Generating visualization of detected anomalies...</div>
+                        <div class="demo-output success">Visualization available at http://localhost:8080/dashboard</div>
                     </div>
                     <p>This advanced anomaly detection system leverages machine learning algorithms to identify unusual patterns in network traffic and automatically responds to potential threats.</p>
+                `;
+            } else {
+                // Default demo content if project title doesn't match any specific case
+                demoContent = `
+                    <div class="demo-terminal">
+                        <div class="demo-line">./security_scan.sh --deep</div>
+                        <div class="demo-output">Initiating comprehensive security scan...</div>
+                        <div class="demo-output success">System integrity verified</div>
+                        <div class="demo-output">Scanning network interfaces...</div>
+                        <div class="demo-output success">All network interfaces secured</div>
+                        <div class="demo-line">cat /var/log/security_report.txt</div>
+                        <div class="demo-output">Firewall status: Active</div>
+                        <div class="demo-output">IDS/IPS status: Running</div>
+                        <div class="demo-output success">No vulnerabilities detected</div>
+                    </div>
+                    <p>This project demonstrates advanced cybersecurity techniques and implementations.</p>
                 `;
             }
             
             demoBody.innerHTML = demoContent;
             
-            // Show the modal
+            // Show the modal and handle cursor visibility
+            document.body.classList.add('demo-open');
+            
+            // Ensure custom cursor works with modal
+            const customCursor = document.querySelector('.custom-cursor');
+            if (customCursor) {
+                // Force the custom cursor to be visible and on top
+                customCursor.style.zIndex = "20001";
+                customCursor.style.pointerEvents = "none";
+                customCursor.style.display = "block";
+                customCursor.style.opacity = "1";
+                
+                // Hide default cursor on body and all elements in the modal
+                document.body.style.cursor = "none";
+                
+                // Set cursor:none on all elements in the modal via JS as a backup
+                const allModalElements = demoModal.querySelectorAll('*');
+                allModalElements.forEach(el => {
+                    el.style.cursor = "none";
+                });
+                
+                // Additional fix for Firefox and Safari
+                demoModal.style.cursor = "none";
+            }
+            
             demoModal.classList.add('show');
+            
+            // After modal is shown, ensure cursor is on top
+            setTimeout(() => {
+                if (customCursor) {
+                    customCursor.style.zIndex = "20001"; 
+                }
+                
+                // Track mouse movement specifically while modal is open
+                const handleModalMouseMove = (e) => {
+                    if (customCursor) {
+                        customCursor.style.zIndex = "20001";
+                        customCursor.style.display = "block";
+                    }
+                };
+                
+                // Add special event listener for when modal is open
+                document.addEventListener('mousemove', handleModalMouseMove);
+                
+                // Store the function reference to remove it later
+                demoModal.handleModalMouseMove = handleModalMouseMove;
+            }, 100);
+            
+            // Add terminal typing effect to the demo content
+            const demoLines = demoModal.querySelectorAll('.demo-line');
+            
+            demoLines.forEach((line, index) => {
+                // Get original text
+                const originalText = line.textContent;
+                // Clear text
+                line.textContent = '';
+                
+                // Save original terminal content to restore later if needed
+                if (index === 0) {
+                    line.dataset.fullText = originalText;
+                    
+                    // Type the text character by character
+                    let charIndex = 0;
+                    const typeInterval = setInterval(() => {
+                        if (charIndex < originalText.length) {
+                            line.textContent += originalText.charAt(charIndex);
+                            charIndex++;
+                        } else {
+                            clearInterval(typeInterval);
+                            
+                            // Show outputs with a slight delay
+                            setTimeout(() => {
+                                const outputs = line.nextElementSibling;
+                                if (outputs && outputs.classList.contains('demo-output')) {
+                                    outputs.style.opacity = '1';
+                                }
+                            }, 300);
+                        }
+                    }, 50);
+                } else {
+                    // Just show the command text for other lines with a delay
+                    setTimeout(() => {
+                        line.textContent = originalText;
+                    }, 1000 * index);
+                }
+            });
+            
+            // Add event listeners to elements inside the modal for cursor effects
+            const modalInteractiveElements = demoModal.querySelectorAll('.close-demo');
+            modalInteractiveElements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    if (customCursor) customCursor.classList.add('hover');
+                });
+                
+                element.addEventListener('mouseleave', () => {
+                    if (customCursor) customCursor.classList.remove('hover');
+                });
+            });
         });
     });
     
-    // Close demo modal
+    // Close demo modal with improved cursor handling
     document.querySelector('.close-demo').addEventListener('click', () => {
         demoModal.classList.remove('show');
+        
+        setTimeout(() => {
+            document.body.classList.remove('demo-open');
+            
+            // Reset cursor styles
+            const customCursor = document.querySelector('.custom-cursor');
+            if (customCursor) {
+                customCursor.style.zIndex = "";
+                customCursor.style.display = "";
+                customCursor.style.opacity = "";
+            }
+            
+            // Reset body cursor
+            document.body.style.cursor = "";
+            
+            // Remove special modal mousemove handler
+            if (demoModal.handleModalMouseMove) {
+                document.removeEventListener('mousemove', demoModal.handleModalMouseMove);
+                delete demoModal.handleModalMouseMove;
+            }
+        }, 300); // Match transition duration
+    });
+    
+    // Close modal when clicking outside content
+    demoModal.addEventListener('click', (e) => {
+        if (e.target === demoModal) {
+            demoModal.classList.remove('show');
+            
+            setTimeout(() => {
+                document.body.classList.remove('demo-open');
+                
+                // Reset cursor styles
+                const customCursor = document.querySelector('.custom-cursor');
+                if (customCursor) {
+                    customCursor.style.zIndex = "";
+                    customCursor.style.display = "";
+                    customCursor.style.opacity = "";
+                }
+                
+                // Reset body cursor
+                document.body.style.cursor = "";
+                
+                // Remove special modal mousemove handler
+                if (demoModal.handleModalMouseMove) {
+                    document.removeEventListener('mousemove', demoModal.handleModalMouseMove);
+                    delete demoModal.handleModalMouseMove;
+                }
+            }, 300);
+        }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && demoModal.classList.contains('show')) {
+            demoModal.classList.remove('show');
+            
+            setTimeout(() => {
+                document.body.classList.remove('demo-open');
+                
+                // Reset cursor styles
+                const customCursor = document.querySelector('.custom-cursor');
+                if (customCursor) {
+                    customCursor.style.zIndex = "";
+                    customCursor.style.display = "";
+                    customCursor.style.opacity = "";
+                }
+                
+                // Reset body cursor
+                document.body.style.cursor = "";
+                
+                // Remove special modal mousemove handler
+                if (demoModal.handleModalMouseMove) {
+                    document.removeEventListener('mousemove', demoModal.handleModalMouseMove);
+                    delete demoModal.handleModalMouseMove;
+                }
+            }, 300);
+        }
     });
     
     // Custom cursor options

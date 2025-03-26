@@ -1878,11 +1878,21 @@ body.light-theme .green {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: var(--primary-color);
+    color: #00ffaa;
     font-family: var(--code-font);
     font-size: 1.5rem;
-    text-shadow: 0 0 10px rgba(0, 119, 182, 0.5);
+    text-shadow: 0 0 10px rgba(0, 255, 170, 0.7);
     opacity: 0.8;
+    animation: pulse-scan 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-scan {
+    0%, 100% {
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 1;
+    }
 }
 
 @keyframes scanning {
@@ -2309,7 +2319,7 @@ body.terminal-mode .theme-toggle {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(10, 25, 47, 0.85);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2317,6 +2327,8 @@ body.terminal-mode .theme-toggle {
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    cursor: auto !important;
 }
 
 .demo-modal.show {
@@ -2325,7 +2337,7 @@ body.terminal-mode .theme-toggle {
 }
 
 .demo-content {
-    background-color: var(--darker-bg);
+    background-color: #0a0e17;
     width: 90%;
     max-width: 800px;
     height: 80%;
@@ -2333,31 +2345,203 @@ body.terminal-mode .theme-toggle {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 0 30px rgba(0, 180, 216, 0.2), 0 0 60px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(0, 180, 216, 0.2);
+    position: relative;
+    animation: modal-appear 0.3s ease-out;
+    cursor: auto !important;
+}
+
+@keyframes modal-appear {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .demo-header {
-    background-color: var(--primary-color);
-    padding: 1rem;
+    background-color: #0f1923;
+    padding: 0.8rem 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid rgba(0, 180, 216, 0.2);
 }
 
 .demo-header h3 {
-    color: var(--darker-bg);
+    color: #64ffda;
     margin: 0;
+    font-family: var(--code-font);
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.demo-header h3::before {
+    content: "$";
+    margin-right: 8px;
+    color: #64ffda;
+    font-weight: bold;
 }
 
 .close-demo {
-    color: var(--darker-bg);
-    font-size: 1.5rem;
+    color: #8892b0;
+    font-size: 1.2rem;
     cursor: pointer;
+    transition: all 0.2s ease;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.close-demo:hover {
+    color: #64ffda;
+    background-color: rgba(100, 255, 218, 0.1);
 }
 
 .demo-body {
     flex: 1;
     padding: 1rem;
     overflow-y: auto;
+    font-family: var(--code-font);
+    color: #8892b0;
+    line-height: 1.6;
+    background-color: #0a0e17;
+}
+
+.demo-terminal {
+    background-color: #0f1923;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    font-family: var(--code-font);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    border: 1px solid rgba(100, 255, 218, 0.1);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    overflow-x: auto;
+}
+
+.demo-line {
+    color: #64ffda;
+    margin-bottom: 0.75rem;
+    padding-left: 0.5rem;
+    border-left: 2px solid #64ffda;
+    white-space: nowrap;
+    overflow-x: auto;
+    font-weight: 500;
+}
+
+.demo-line::before {
+    content: "$";
+    margin-right: 8px;
+    color: #64ffda;
+    font-weight: bold;
+}
+
+.demo-output {
+    color: #c9d1d9;
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+.demo-output.success {
+    color: #64ffda;
+}
+
+.demo-output.warning {
+    color: #ffbd2e;
+}
+
+.demo-output.error {
+    color: #ff5f56;
+}
+
+.demo-body p {
+    color: #8892b0;
+    margin-top: 1.5rem;
+    padding: 0 0.5rem;
+    line-height: 1.7;
+    font-family: var(--main-font);
+}
+
+.demo-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.demo-body::-webkit-scrollbar-track {
+    background: #0a0e17;
+}
+
+.demo-body::-webkit-scrollbar-thumb {
+    background: rgba(100, 255, 218, 0.2);
+    border-radius: 3px;
+}
+
+.demo-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 255, 218, 0.4);
+}
+
+/* Ensure cursor is visible when modal is open */
+body.demo-open {
+    cursor: none !important;
+}
+
+.custom-cursor {
+    z-index: 9999;
+}
+
+.demo-modal.show ~ .custom-cursor,
+.demo-modal.show .custom-cursor {
+    z-index: 20001 !important;
+    pointer-events: none !important;
+    display: block !important;
+}
+
+/* Set cursor properties for specific elements in the modal */
+.demo-content,
+.demo-content *,
+.demo-body,
+.demo-terminal,
+.demo-line,
+.demo-output,
+.demo-header {
+    cursor: none !important;
+}
+
+.close-demo {
+    cursor: none !important;
+}
+
+.close-demo:hover {
+    cursor: none !important;
+}
+
+/* Override any default cursor styles that might be applied by the browser */
+.demo-modal *:hover {
+    cursor: none !important;
+}
+
+/* Fix for Firefox and other browsers */
+.demo-modal {
+    cursor: none !important;
+}
+
+@media (max-width: 768px) {
+    .demo-modal,
+    .demo-modal * {
+        cursor: none !important;
+    }
 }
 
 /* Position for mobile devices */
