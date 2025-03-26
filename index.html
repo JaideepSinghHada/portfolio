@@ -15,6 +15,44 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <!-- GSAP for animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        /* Form status messages */
+        #form-status {
+            margin: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .success-message, .error-message {
+            padding: 12px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .success-message {
+            background-color: rgba(39, 174, 96, 0.1);
+            color: #27ae60;
+            border: 1px solid rgba(39, 174, 96, 0.3);
+        }
+        
+        .error-message {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: #e74c3c;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+        }
+        
+        .success-message i, .error-message i {
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
     <!-- Matrix Rain Canvas -->
@@ -28,14 +66,6 @@
     
     <!-- Particle Network Background -->
     <div id="particles-js"></div>
-    
-    <!-- Cursor Options Panel -->
-    <div class="cursor-options">
-        <div class="cursor-option active" data-cursor="default"><i class="fas fa-mouse-pointer"></i></div>
-        <div class="cursor-option" data-cursor="terminal"><i class="fas fa-terminal"></i></div>
-        <div class="cursor-option" data-cursor="shield"><i class="fas fa-shield-alt"></i></div>
-        <div class="cursor-option" data-cursor="lock"><i class="fas fa-lock"></i></div>
-    </div>
     
     <!-- Theme Toggle Button -->
     <div class="theme-toggle" id="themeToggle">
@@ -430,10 +460,10 @@
                         </div>
                     </div>
                     <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-medium"></i></a>
+                        <a href="https://www.linkedin.com/in/jaideep-singh-hada-cs" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/JaideepSinghHada" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.instagram.com/jaideep_singh_o/" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://x.com/jerry_singh_?s=11&t=uX0yqQLiuR9MzI8366zBRQ" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
                     </div>
                 </div>
                 <div class="contact-form">
@@ -450,6 +480,7 @@
                             <textarea id="message" name="message" rows="5" required></textarea>
                             <label for="message">Message</label>
                         </div>
+                        <div id="form-status"></div>
                         <button type="submit" class="submit-btn">
                             <span class="btn-text">Send Message</span>
                             <span class="btn-icon"><i class="fas fa-paper-plane"></i></span>
@@ -533,5 +564,76 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+    
+    <!-- Ensure home is the default section on page load/refresh -->
+    <script>
+        window.onload = function() {
+            // Scroll to top of page
+            window.scrollTo(0, 0);
+            
+            // Update active nav link
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('href') === '#home') {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Initialize EmailJS - Replace with your User ID
+            emailjs.init("YOUR_USER_ID");
+            
+            // Handle contact form submission
+            const contactForm = document.getElementById('contactForm');
+            const formStatus = document.getElementById('form-status');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    
+                    const submitBtn = contactForm.querySelector('button[type="submit"]');
+                    const originalBtnText = submitBtn.innerHTML;
+                    
+                    // Update button to show loading state
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                    submitBtn.disabled = true;
+                    
+                    // Prepare template parameters
+                    const templateParams = {
+                        from_name: document.getElementById('name').value,
+                        from_email: document.getElementById('email').value,
+                        message: document.getElementById('message').value
+                    };
+                    
+                    // Send email using EmailJS
+                    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                        .then(function(response) {
+                            // Show success message
+                            formStatus.innerHTML = '<div class="success-message"><i class="fas fa-check-circle"></i> Message sent successfully!</div>';
+                            contactForm.reset();
+                            
+                            // Reset button
+                            submitBtn.innerHTML = originalBtnText;
+                            submitBtn.disabled = false;
+                            
+                            // Clear success message after 5 seconds
+                            setTimeout(() => {
+                                formStatus.innerHTML = '';
+                            }, 5000);
+                        }, function(error) {
+                            // Show error message
+                            formStatus.innerHTML = '<div class="error-message"><i class="fas fa-exclamation-circle"></i> There was a problem sending your message. Please try again.</div>';
+                            console.log('EmailJS Error:', error);
+                            
+                            // Reset button
+                            submitBtn.innerHTML = originalBtnText;
+                            submitBtn.disabled = false;
+                        });
+                });
+            }
+        };
+    </script>
 </body>
 </html>

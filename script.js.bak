@@ -1,7 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Remove any saved cursor preferences
-    localStorage.removeItem('selectedCursor');
-    
     // Add js-cursor-active class to body to hide default cursor
     document.body.classList.add('js-cursor-active');
     

@@ -1610,7 +1610,7 @@ html body.js-cursor-active .cursor-option {
     position: fixed;
     width: 24px;
     height: 36px;
-    pointer-events: none;
+    pointer-events: none; /* Critical - ensures cursor doesn't interfere with clicks */
     z-index: 9999;
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="36" viewBox="0 0 24 24"><path fill="%23ffffff" stroke="%2300B4D8" stroke-width="1.25" d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.85a.5.5 0 0 0-.85.35Z"></path></svg>');
     background-repeat: no-repeat;
@@ -4317,10 +4317,28 @@ body.terminal-mode .security-alert.critical .click-count {
     color: #ff0000;
 }
 
-/* Hide cursor options panel */
-.cursor-options {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
+/* Universal selector to disable default cursor but keep functionality */
+html body.js-cursor-active {
+    cursor: none !important;
+}
+
+html body.js-cursor-active * {
+    cursor: none !important;
+    pointer-events: auto !important; /* This is critical - ensure elements remain clickable */
+}
+
+html body.js-cursor-active a,
+html body.js-cursor-active button,
+html body.js-cursor-active input,
+html body.js-cursor-active textarea,
+html body.js-cursor-active select,
+html body.js-cursor-active [role="button"],
+html body.js-cursor-active .clickable {
+    cursor: none !important;
+    pointer-events: auto !important;
+}
+
+/* The only exception - cursor option buttons */
+html body.js-cursor-active .cursor-option {
+    cursor: pointer !important;
 }
