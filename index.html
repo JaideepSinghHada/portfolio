@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#000000">
     <title>Jaideep Singh Hada | Cybersecurity Analyst</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="loading.css">
@@ -51,6 +55,731 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Contact section spacing adjustment */
+        .contact {
+            padding-bottom: 20px;
+        }
+        
+        /* Enhanced Footer Styles */
+        footer {
+            background-color: var(--bg-color-secondary);
+            position: relative;
+            padding: 0;
+            margin-top: 20px;
+            margin-bottom: 0;
+            border-top: 1px solid rgba(var(--accent-rgb), 0.2);
+            overflow: hidden;
+        }
+        
+        footer:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(var(--accent-rgb), 0.03), transparent);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .footer-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(rgba(var(--accent-rgb), 0.1) 1px, transparent 1px), 
+                radial-gradient(rgba(var(--accent-rgb), 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        .cyber-separator {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            margin-bottom: 0;
+            position: relative;
+            opacity: 0.7;
+        }
+        
+        .cyber-separator:before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 20px;
+            background-color: var(--bg-color-secondary);
+            border: 1px solid var(--accent-color);
+            border-radius: 3px;
+            box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.4);
+            animation: pulse 3s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 5px rgba(var(--accent-rgb), 0.3); }
+            100% { box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.6); }
+        }
+        
+        .footer-content {
+            padding: 20px 5% 0 5%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 0 10px;
+        }
+        
+        .footer-brand, .footer-links-container {
+            padding: 5px;
+            position: relative;
+        }
+        
+        .footer-logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin: 0;
+            text-align: center;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px rgba(var(--accent-rgb), 0.3);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-logo:hover {
+            text-shadow: 0 0 8px rgba(var(--accent-rgb), 0.5);
+            transform: scale(1.05);
+        }
+        
+        .footer-logo .bracket {
+            color: var(--text-color);
+            opacity: 0.8;
+            transition: opacity 0.3s ease, color 0.3s ease;
+        }
+        
+        .footer-brand:hover .bracket {
+            opacity: 1;
+            color: var(--accent-color);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: flex-end;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-color-muted);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            position: relative;
+            padding-bottom: 3px;
+        }
+        
+        .footer-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--text-color);
+            transform: translateY(-2px);
+        }
+        
+        .footer-links a:hover:after {
+            width: 100%;
+        }
+        
+        .footer-bottom {
+            padding-top: 10px;
+            border-top: 1px solid rgba(var(--text-rgb), 0.05);
+            text-align: center;
+            position: relative;
+        }
+        
+        .footer-copyright {
+            color: var(--text-color-muted);
+            font-size: 12px;
+            margin: 0;
+            padding: 5px 0 15px;
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-grid {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .footer-links {
+                justify-content: center;
+                margin-top: 10px;
+            }
+        }
+        
+        /* Cipherize Feature Styles */
+        .secret-btn {
+            opacity: 0.6;
+            transition: all 0.3s ease;
+            font-size: 13px !important;
+        }
+        
+        .secret-btn:hover {
+            opacity: 1;
+            color: var(--accent-color) !important;
+            transform: rotate(30deg) !important;
+        }
+        
+        /* Cipherize Modals */
+        .cipherize-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            animation: modal-fade-in 0.3s forwards;
+        }
+        
+        @keyframes modal-fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .cipherize-content {
+            background-color: var(--darker-bg);
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+            max-width: 450px;
+            width: 90%;
+            padding: 25px;
+            box-shadow: 0 0 20px rgba(0, 180, 216, 0.3);
+            position: relative;
+            transform: translateY(20px);
+            animation: modal-slide-up 0.3s forwards;
+        }
+        
+        @keyframes modal-slide-up {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .cipherize-header {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 180, 216, 0.2);
+        }
+        
+        .cipherize-header h3 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-family: var(--code-font);
+            text-transform: uppercase;
+        }
+        
+        .cipherize-body p {
+            margin: 10px 0;
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        
+        .cipherize-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+            gap: 15px;
+        }
+        
+        .cipherize-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-family: var(--code-font);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cipherize-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        
+        .cipherize-btn:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .cipherize-btn.yes {
+            background-color: rgba(255, 59, 48, 0.2);
+            color: #ff3b30;
+            border: 1px solid rgba(255, 59, 48, 0.5);
+        }
+        
+        .cipherize-btn.yes:hover {
+            background-color: rgba(255, 59, 48, 0.3);
+            box-shadow: 0 0 10px rgba(255, 59, 48, 0.5);
+        }
+        
+        .cipherize-btn.no {
+            background-color: rgba(0, 122, 255, 0.2);
+            color: #007aff;
+            border: 1px solid rgba(0, 122, 255, 0.5);
+        }
+        
+        .cipherize-btn.no:hover {
+            background-color: rgba(0, 122, 255, 0.3);
+            box-shadow: 0 0 10px rgba(0, 122, 255, 0.5);
+        }
+        
+        /* Black Hole Animation */
+        .black-hole-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        
+        .black-hole-container.active {
+            opacity: 1;
+        }
+        
+        .black-hole-container.consume-all {
+            background-color: rgb(0, 0, 0);
+            cursor: none !important;
+        }
+        
+        .black-hole-container.consume-all * {
+            cursor: none !important;
+        }
+        
+        /* Hide cursor at html/body level when black hole is active */
+        html.cursor-hidden, 
+        html.cursor-hidden * {
+            cursor: none !important;
+        }
+        
+        .black-hole {
+            position: relative;
+            width: 0;
+            height: 0;
+            transition: all 2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .black-hole-container.active .black-hole {
+            width: 150px;
+            height: 150px;
+        }
+        
+        .black-hole-container.consume-all .black-hole {
+            width: 300vw;
+            height: 300vh;
+            background: radial-gradient(
+                circle at center,
+                rgba(0, 0, 0, 1) 0%,
+                rgba(0, 0, 0, 0.95) 30%,
+                rgba(0, 0, 0, 0.9) 60%,
+                rgba(0, 0, 0, 0.85) 100%
+            );
+            box-shadow: inset 0 0 100px 50px #000;
+        }
+        
+        /* Accretion disk effect */
+        .black-hole-container.consume-all:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200vw;
+            height: 200vh;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(
+                ellipse at center,
+                rgba(0, 0, 0, 1) 0%,
+                rgba(0, 0, 0, 0.95) 10%,
+                rgba(0, 180, 216, 0.05) 20%,
+                rgba(123, 44, 191, 0.05) 30%,
+                rgba(0, 0, 0, 0) 40%
+            );
+            opacity: 0.3;
+            z-index: 9998;
+            border-radius: 50%;
+            box-shadow: 0 0 60px 30px rgba(0, 0, 0, 0.8);
+            animation: accretion-disk-pulse 8s infinite alternate;
+            pointer-events: none;
+        }
+        
+        @keyframes accretion-disk-pulse {
+            0% { 
+                transform: translate(-50%, -50%) scale(0.98);
+                opacity: 0.2;
+            }
+            100% { 
+                transform: translate(-50%, -50%) scale(1.02); 
+                opacity: 0.4;
+            }
+        }
+        
+        .event-horizon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(
+                circle at center,
+                rgba(0, 0, 0, 1) 0%,
+                rgba(0, 0, 0, 0.9) 30%,
+                rgba(0, 0, 0, 0.7) 40%,
+                rgba(0, 180, 216, 0.4) 60%,
+                rgba(123, 44, 191, 0.6) 80%,
+                rgba(255, 255, 255, 0.8) 90%,
+                rgba(255, 255, 255, 1) 100%
+            );
+            box-shadow: 0 0 60px rgba(0, 180, 216, 0.8), 
+                        0 0 100px rgba(123, 44, 191, 0.6);
+            animation: horizon-pulse 4s infinite alternate;
+            opacity: 0.8;
+            z-index: 2;
+        }
+        
+        .black-hole-container.consume-all .event-horizon {
+            border-radius: 0;
+            background: none;
+            box-shadow: none;
+            opacity: 0;
+        }
+        
+        @keyframes horizon-pulse {
+            0% { box-shadow: 0 0 60px rgba(0, 180, 216, 0.6), 0 0 100px rgba(123, 44, 191, 0.4); }
+            100% { box-shadow: 0 0 80px rgba(0, 180, 216, 0.9), 0 0 140px rgba(123, 44, 191, 0.7); }
+        }
+        
+        .singularity {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40%;
+            height: 40%;
+            border-radius: 50%;
+            background-color: #000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+            z-index: 1;
+        }
+        
+        .black-hole-container.consume-all .singularity {
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+            opacity: 1;
+        }
+        
+        .debris-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .debris {
+            position: absolute;
+            border-radius: 2px;
+            opacity: 0.8;
+            transform-origin: center center;
+            transition: all 3s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        
+        .being-consumed {
+            transition: all 3s cubic-bezier(0.25, 0.1, 0.25, 1);
+            filter: hue-rotate(90deg) brightness(0.7);
+            transform: scale(0.95);
+            opacity: 0.7;
+        }
+        
+        .being-consumed * {
+            transition: all 3s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        
+        .black-hole-container.active .debris {
+            transform: translate(0, 0) !important;
+            left: 50% !important;
+            top: 50% !important;
+            width: 0 !important;
+            height: 0 !important;
+            opacity: 0 !important;
+        }
+        
+        /* Cursor blocker element */
+        .cursor-blocker {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: transparent;
+            z-index: 10000;
+            pointer-events: all !important; /* Capture all mouse events */
+            display: none;
+            cursor: none !important;
+        }
+        
+        .black-hole-container.consume-all .cursor-blocker {
+            display: block;
+        }
+    </style>
+    
+    <!-- Mobile and Responsive Design -->
+    <style>
+        /* Mobile Navigation */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: var(--bg-color-secondary);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.3s ease;
+                z-index: 999;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+            
+            .hamburger {
+                display: flex !important;
+                flex-direction: column;
+                justify-content: space-around;
+                width: 30px;
+                height: 25px;
+                cursor: pointer;
+                z-index: 1000;
+            }
+            
+            .hamburger span {
+                width: 100%;
+                height: 3px;
+                background-color: var(--text-color);
+                border-radius: 3px;
+                transition: all 0.3s ease;
+            }
+            
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 8px);
+            }
+            
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -8px);
+            }
+            
+            /* Hero Section */
+            .hero .grid-container {
+                grid-template-columns: 1fr !important;
+                gap: 0;
+            }
+            
+            .hero-bg {
+                display: none;
+            }
+            
+            .hero-content {
+                text-align: center;
+                padding: 0 20px;
+            }
+            
+            .terminal {
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+            
+            .roles {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .roles .separator {
+                display: none;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+                gap: 15px;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+            }
+            
+            /* About Section */
+            .about-content {
+                flex-direction: column !important;
+            }
+            
+            .about-text, .about-visual {
+                width: 100% !important;
+            }
+            
+            .cyber-dashboard {
+                margin-top: 30px;
+            }
+            
+            /* Skills Section */
+            .skills-container {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .tools-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            
+            /* Projects Section */
+            .projects-container {
+                grid-template-columns: 1fr !important;
+            }
+            
+            /* Contact Section */
+            .contact-container {
+                flex-direction: column !important;
+            }
+            
+            .contact-info, .contact-form {
+                width: 100% !important;
+            }
+            
+            .contact-info {
+                margin-bottom: 30px;
+            }
+            
+            /* Black Hole Animation */
+            .black-hole-container.active .black-hole {
+                width: 120px;
+                height: 120px;
+            }
+            
+            /* Make black hole accretion disk effect smaller on mobile */
+            .black-hole-container.consume-all:after {
+                width: 150vw;
+                height: 150vh;
+            }
+            
+            /* Adjust debris for better mobile performance */
+            .debris {
+                will-change: transform;
+            }
+            
+            /* Better mobile touch handling */
+            .cursor-blocker {
+                touch-action: none;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+        }
+        
+        /* Small mobile devices */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem !important;
+            }
+            
+            .section-header h2 {
+                font-size: 1.5rem !important;
+            }
+            
+            .terminal-header {
+                padding: 8px !important;
+            }
+            
+            .terminal-body {
+                padding: 12px !important;
+                font-size: 14px !important;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .social-links {
+                justify-content: center !important;
+            }
+            
+            .black-hole-container.active .black-hole {
+                width: 100px;
+                height: 100px;
+            }
         }
     </style>
 </head>
@@ -492,17 +1221,28 @@
         
         <!-- Footer -->
         <footer>
+            <div class="cyber-separator"></div>
+            <div class="footer-pattern"></div>
             <div class="footer-content">
-                <div class="footer-logo">
-                    <span class="bracket">{</span> JSH <span class="bracket">}</span>
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <div class="footer-logo">
+                            <span class="bracket">{</span> JSH <span class="bracket">}</span>
+                        </div>
+                    </div>
+                    <div class="footer-links-container">
+                        <div class="footer-links">
+                            <a href="#home">Home</a>
+                            <a href="#about">About</a>
+                            <a href="#skills">Skills</a>
+                            <a href="#projects">Projects</a>
+                            <a href="#contact">Contact</a>
+                            <a href="#" id="cipherizeBtn" class="secret-btn" title="Site options"><i class="fas fa-cog"></i></a>
+                        </div>
+                    </div>
                 </div>
-                <p>© 2024 Jaideep Singh Hada. All Rights Reserved.</p>
-                <div class="footer-links">
-                    <a href="#home">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#skills">Skills</a>
-                    <a href="#projects">Projects</a>
-                    <a href="#contact">Contact</a>
+                <div class="footer-bottom">
+                    <p class="footer-copyright">&copy; 2024 All Rights Reserved.</p>
                 </div>
             </div>
         </footer>
@@ -537,6 +1277,50 @@
         </div>
     </div>
 
+    <!-- Cipherize Confirmation Modal -->
+    <div class="cipherize-modal" id="cipherizeModal">
+        <div class="cipherize-content">
+            <div class="cipherize-header">
+                <h3>Initiate Cipherize Protocol?</h3>
+            </div>
+            <div class="cipherize-body">
+                <p>Are you sure you want to execute the Cipherize Protocol?</p>
+                <p>This will overwrite the current interface configuration.</p>
+                <div class="cipherize-buttons">
+                    <button id="cipherizeYes" class="cipherize-btn yes">Execute</button>
+                    <button id="cipherizeNo" class="cipherize-btn no">Abort</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final Warning Modal -->
+    <div class="cipherize-modal" id="finalWarningModal">
+        <div class="cipherize-content">
+            <div class="cipherize-header">
+                <h3>Final Warning</h3>
+            </div>
+            <div class="cipherize-body">
+                <p>The developer worked hard to build this website.</p>
+                <p>Executing the Cipherize Protocol will temporarily dismantle the interface.</p>
+                <div class="cipherize-buttons">
+                    <button id="finalYes" class="cipherize-btn yes">Proceed Anyway</button>
+                    <button id="finalNo" class="cipherize-btn no">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Black Hole Container -->
+    <div class="black-hole-container" id="blackHoleContainer">
+        <div class="black-hole">
+            <div class="event-horizon"></div>
+            <div class="singularity"></div>
+        </div>
+        <div class="debris-container"></div>
+        <div class="cursor-blocker" id="cursorBlocker" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99999; cursor: none !important;"></div>
+    </div>
+
     <!-- Konami Code Easter Egg -->
     <script>
         // Konami Code Sequence
@@ -565,9 +1349,252 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
     
+    <!-- Direct cursor hiding for consumed state -->
+    <style id="cursor-hider">
+        .black-hole-container.consume-all,
+        .black-hole-container.consume-all * {
+            cursor: none !important;
+        }
+        
+        html.cursor-hidden,
+        html.cursor-hidden *,
+        body.cursor-hidden,
+        body.cursor-hidden * {
+            cursor: none !important;
+        }
+    </style>
+    
+    <!-- Cipherize Feature JS -->
+    <script>
+        // Function to prevent all mouse events
+        function preventEvent(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const cipherizeBtn = document.getElementById('cipherizeBtn');
+            const cipherizeModal = document.getElementById('cipherizeModal');
+            const finalWarningModal = document.getElementById('finalWarningModal');
+            const blackHoleContainer = document.getElementById('blackHoleContainer');
+            const container = document.querySelector('.container');
+            
+            // Buttons
+            const cipherizeYes = document.getElementById('cipherizeYes');
+            const cipherizeNo = document.getElementById('cipherizeNo');
+            const finalYes = document.getElementById('finalYes');
+            const finalNo = document.getElementById('finalNo');
+            
+            // Hide modals initially
+            cipherizeModal.style.display = 'none';
+            finalWarningModal.style.display = 'none';
+            blackHoleContainer.style.display = 'none';
+            
+            // Generate debris elements
+            function generateDebris() {
+                const debrisContainer = document.querySelector('.debris-container');
+                debrisContainer.innerHTML = '';
+                
+                // Capture nodes to convert to debris
+                const elementsToCapture = [
+                    'nav', '.hero', '#about', '#skills', '#projects', 
+                    '#contact', 'footer', '.section-header', '.btn'
+                ];
+                
+                // Create debris elements
+                for (let i = 0; i < 100; i++) {
+                    const debris = document.createElement('div');
+                    debris.className = 'debris';
+                    
+                    // Random positioning and sizing
+                    const size = Math.random() * 30 + 5;
+                    const angle = Math.random() * 360;
+                    const distance = Math.random() * 40 + 20;
+                    
+                    debris.style.width = `${size}px`;
+                    debris.style.height = `${size}px`;
+                    debris.style.left = `calc(50% - ${size/2}px)`;
+                    debris.style.top = `calc(50% - ${size/2}px)`;
+                    debris.style.transform = `rotate(${angle}deg) translate(${distance}vw, ${distance/2}vh)`;
+                    
+                    // Set random colors or images from website elements
+                    const colors = [
+                        'var(--primary-color)', 'var(--secondary-color)', 'var(--accent)',
+                        'var(--text-primary)', 'var(--text-secondary)'
+                    ];
+                    debris.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    debris.style.opacity = Math.random() * 0.7 + 0.3;
+                    
+                    // Set random shape
+                    const shapes = ['50%', '0%', '50% 0% 50% 50%', '0% 50% 50% 0%'];
+                    debris.style.borderRadius = shapes[Math.floor(Math.random() * shapes.length)];
+                    
+                    debrisContainer.appendChild(debris);
+                }
+            }
+            
+            // Main animation function
+            function startCipherizeAnimation() {
+                // Generate initial debris
+                generateDebris();
+                
+                // Show black hole container
+                blackHoleContainer.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                
+                // Animate black hole appearing
+                setTimeout(() => {
+                    blackHoleContainer.classList.add('active');
+                    
+                    // Wait a moment, then start sucking in the website
+                    setTimeout(() => {
+                        container.classList.add('being-consumed');
+                        
+                        // After enough time for animation to complete
+                        setTimeout(() => {
+                            // Hide the entire container
+                            container.style.display = 'none';
+                            
+                            // Make black hole grow to consume everything
+                            blackHoleContainer.classList.add('consume-all');
+                            
+                            // Apply additional styling for more realistic black hole appearance
+                            document.body.style.backgroundColor = '#000';
+                            document.body.style.cursor = 'none';
+                            document.documentElement.classList.add('cursor-hidden');
+                            document.body.classList.add('cursor-hidden');
+                            
+                            // Disable mouse functionality
+                            const cursorBlocker = document.getElementById('cursorBlocker');
+                            if (cursorBlocker) {
+                                cursorBlocker.style.display = 'block';
+                                
+                                // Capture and prevent all mouse events
+                                cursorBlocker.addEventListener('mousedown', preventEvent, true);
+                                cursorBlocker.addEventListener('mouseup', preventEvent, true);
+                                cursorBlocker.addEventListener('click', preventEvent, true);
+                                cursorBlocker.addEventListener('contextmenu', preventEvent, true);
+                                cursorBlocker.addEventListener('mousemove', preventEvent, true);
+                                
+                                // Prevent touch events on mobile
+                                cursorBlocker.addEventListener('touchstart', preventEvent, true);
+                                cursorBlocker.addEventListener('touchmove', preventEvent, true);
+                                cursorBlocker.addEventListener('touchend', preventEvent, true);
+                                cursorBlocker.addEventListener('touchcancel', preventEvent, true);
+                            }
+                            
+                            // Disable mouse functionality globally as well
+                            document.addEventListener('mousedown', preventEvent, true);
+                            document.addEventListener('mouseup', preventEvent, true);
+                            document.addEventListener('click', preventEvent, true);
+                            document.addEventListener('contextmenu', preventEvent, true);
+                            document.addEventListener('mousemove', preventEvent, true);
+                            
+                            // Add some subtle accretion disk effects to the final state
+                            const singularity = document.querySelector('.singularity');
+                            if (singularity) {
+                                singularity.style.boxShadow = 'inset 0 0 60px 30px rgba(0, 0, 0, 0.9)';
+                            }
+                            
+                            // Store the state so we don't restore on refresh
+                            localStorage.setItem('websiteConsumed', 'true');
+                            
+                            // Set a listener for tab close
+                            window.addEventListener('beforeunload', function() {
+                                // Reset the consumed state when tab is closed
+                                localStorage.removeItem('websiteConsumed');
+                            });
+                        }, 3000);
+                    }, 1500);
+                }, 100);
+            }
+            
+            // Check if the website was consumed previously
+            if (localStorage.getItem('websiteConsumed') === 'true') {
+                // Website was consumed, show only black hole
+                container.style.display = 'none';
+                blackHoleContainer.style.display = 'block';
+                blackHoleContainer.classList.add('active');
+                blackHoleContainer.classList.add('consume-all');
+                document.body.style.overflow = 'hidden';
+                document.body.style.backgroundColor = '#000';
+                document.body.style.cursor = 'none';
+                document.documentElement.classList.add('cursor-hidden');
+                document.body.classList.add('cursor-hidden');
+                
+                // Apply additional styling for the final state
+                const singularity = document.querySelector('.singularity');
+                if (singularity) {
+                    singularity.style.boxShadow = 'inset 0 0 60px 30px rgba(0, 0, 0, 0.9)';
+                }
+            }
+            
+            // Click event for cipherize button
+            cipherizeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                cipherizeModal.style.display = 'flex';
+            });
+            
+            // First confirmation yes
+            cipherizeYes.addEventListener('click', function() {
+                cipherizeModal.style.display = 'none';
+                finalWarningModal.style.display = 'flex';
+            });
+            
+            // First confirmation no
+            cipherizeNo.addEventListener('click', function() {
+                cipherizeModal.style.display = 'none';
+            });
+            
+            // Final confirmation yes
+            finalYes.addEventListener('click', function() {
+                finalWarningModal.style.display = 'none';
+                startCipherizeAnimation();
+            });
+            
+            // Final confirmation no
+            finalNo.addEventListener('click', function() {
+                finalWarningModal.style.display = 'none';
+            });
+        });
+    </script>
+    
     <!-- Ensure home is the default section on page load/refresh -->
     <script>
         window.onload = function() {
+            // Check for consumed state and enforce cursor hiding
+            if (localStorage.getItem('websiteConsumed') === 'true') {
+                document.documentElement.classList.add('cursor-hidden');
+                document.body.classList.add('cursor-hidden');
+                document.body.style.cursor = 'none';
+                const cursorBlocker = document.getElementById('cursorBlocker');
+                if (cursorBlocker) {
+                    cursorBlocker.style.display = 'block';
+                    
+                    // Capture and prevent all mouse events
+                    cursorBlocker.addEventListener('mousedown', preventEvent, true);
+                    cursorBlocker.addEventListener('mouseup', preventEvent, true);
+                    cursorBlocker.addEventListener('click', preventEvent, true);
+                    cursorBlocker.addEventListener('contextmenu', preventEvent, true);
+                    cursorBlocker.addEventListener('mousemove', preventEvent, true);
+                    
+                    // Prevent touch events on mobile
+                    cursorBlocker.addEventListener('touchstart', preventEvent, true);
+                    cursorBlocker.addEventListener('touchmove', preventEvent, true);
+                    cursorBlocker.addEventListener('touchend', preventEvent, true);
+                    cursorBlocker.addEventListener('touchcancel', preventEvent, true);
+                }
+                
+                // Disable mouse functionality globally as well
+                document.addEventListener('mousedown', preventEvent, true);
+                document.addEventListener('mouseup', preventEvent, true);
+                document.addEventListener('click', preventEvent, true);
+                document.addEventListener('contextmenu', preventEvent, true);
+                document.addEventListener('mousemove', preventEvent, true);
+            }
+            
             // Scroll to top of page
             window.scrollTo(0, 0);
             
@@ -579,6 +1606,25 @@
                     link.classList.add('active');
                 }
             });
+            
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-links');
+            
+            if (hamburger) {
+                hamburger.addEventListener('click', () => {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+                
+                // Close mobile menu when a link is clicked
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
             
             // Handle contact form submission
             const contactForm = document.getElementById('contactForm');

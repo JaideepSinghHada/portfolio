@@ -1860,6 +1860,10 @@ body.light-theme .green {
     pointer-events: none;
 }
 
+body.light-theme .matrix-canvas {
+    opacity: 0.25;
+}
+
 /* Particle Network */
 #particles-js {
     position: fixed;

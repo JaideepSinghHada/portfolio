@@ -380,18 +380,29 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Matrix rain animation
     function drawMatrixRain() {
-        // Semi-transparent black to create fade effect
-        ctx.fillStyle = 'rgba(0, 10, 20, 0.05)';
+        // Adjust background fade effect based on theme
+        const isLightTheme = document.body.classList.contains('light-theme');
+        
+        // Use appropriate fade color and opacity for the theme
+        ctx.fillStyle = isLightTheme ? 'rgba(228, 230, 235, 0.12)' : 'rgba(0, 10, 20, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        // Set text color and font
-        ctx.fillStyle = '#0077b6';
+        // Set text color based on theme
+        // Darker, more saturated color for light mode
+        ctx.fillStyle = isLightTheme ? '#003366' : '#0077b6';
         ctx.font = `${fontSize}px monospace`;
         
         // For each column
         for (let i = 0; i < drops.length; i++) {
             // Get random character
             const char = charArray[Math.floor(Math.random() * charArray.length)];
+            
+            // Random variation to color for visual interest
+            if (Math.random() > 0.98) {
+                ctx.fillStyle = isLightTheme ? '#002244' : '#00a8ff';
+            } else {
+                ctx.fillStyle = isLightTheme ? '#003366' : '#0077b6';
+            }
             
             // Draw character
             ctx.fillText(char, i * fontSize, drops[i] * fontSize);
