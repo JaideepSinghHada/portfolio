@@ -13,6 +13,7 @@
     --warning: #ffd166;
     --code-font: 'Fira Code', monospace;
     --main-font: 'Poppins', sans-serif;
+    --max-width: 1400px; /* Add this line to define max-width */
 }
 
 * {
@@ -56,22 +57,21 @@ ul {
 
 /* Navigation */
 nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.8rem 0;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
     background-color: rgba(10, 25, 47, 0.5);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
-    max-width: 1400px;
+    max-width: var(--max-width);
     margin: 0 auto;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    width: calc(100% - 3rem);
+    z-index: 1000;
 }
 
 nav.scrolled {
@@ -139,6 +139,8 @@ nav.scrolled {
 .hamburger {
     display: none;
     cursor: pointer;
+    position: relative;
+    z-index: 1010;
 }
 
 .hamburger span {
@@ -178,15 +180,13 @@ nav.scrolled {
 
 .hero h1 {
     font-size: 3.2rem;
-    margin: 1rem 0;
     color: var(--text-primary);
     letter-spacing: -0.03em;
     font-weight: 700;
     position: relative;
-    display: inline-flex;
-    flex-wrap: wrap;
     font-family: 'Poppins', sans-serif;
     text-shadow: 0 0 15px rgba(100, 255, 218, 0.15);
+    margin-bottom: 1rem;
 }
 
 @keyframes name-glow {
@@ -200,21 +200,38 @@ nav.scrolled {
 
 /* Grain letter effect - enhanced for sand disintegration */
 #name-container {
-    position: relative;
-    display: inline-flex;
+    display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
-    line-height: 1.1;
-    margin: 0.5rem 0;
-    cursor: pointer;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+.fullname {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    position: relative;
     z-index: 2;
-    letter-spacing: normal;
+}
+
+.first-line {
+    display: inline-block;
+    margin-right: 0.2em;
+}
+
+.second-line {
+    display: inline-block;
 }
 
 .grain-letter {
     position: relative;
     display: inline-block;
     cursor: pointer;
-    transition: transform 0.25s ease, color 0.25s ease, text-shadow 0.25s ease;
+    transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
     z-index: 2;
     will-change: transform;
     user-select: none;
@@ -222,7 +239,7 @@ nav.scrolled {
 
 /* Style for the space characters to ensure proper word spacing */
 .grain-letter[data-text=" "] {
-    margin: 0 0.2em;
+    margin: 0 0.15em;
 }
 
 .particles-container {
@@ -266,7 +283,9 @@ body.terminal-mode .particle {
 
 /* Remove old grain animation effects that are no longer needed */
 .grain-letter:hover {
-    transform: scale(1.05);
+    transform: translateY(-3px) scale(1.05);
+    color: var(--accent);
+    text-shadow: 0 0 10px rgba(0, 180, 216, 0.4);
 }
 
 .grain-letter::before,
@@ -1117,6 +1136,7 @@ body.terminal-mode .stat-icon::after {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
+    width: 100%;
 }
 
 .project-card {
@@ -1127,6 +1147,11 @@ body.terminal-mode .stat-icon::after {
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.05);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 250px;
 }
 
 .project-card::before {
@@ -1147,18 +1172,21 @@ body.terminal-mode .stat-icon::after {
 .project-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 1.5rem;
+    width: 100%;
 }
 
 .project-header h3 {
     font-size: 1.3rem;
     font-weight: 600;
+    word-break: break-word;
 }
 
 .project-links {
     display: flex;
     gap: 1rem;
+    flex-shrink: 0;
 }
 
 .project-link {
@@ -1174,13 +1202,14 @@ body.terminal-mode .stat-icon::after {
 .project-card p {
     color: var(--text-secondary);
     margin-bottom: 1.5rem;
+    flex-grow: 1;
 }
 
 .project-tech {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-top: 1rem;
+    margin-top: auto;
 }
 
 .tech-tag {
@@ -1197,7 +1226,8 @@ body.terminal-mode .stat-icon::after {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
-    align-items: center;
+    align-items: flex-start;
+    width: 100%;
 }
 
 .contact-info h3 {
@@ -1213,12 +1243,14 @@ body.terminal-mode .stat-icon::after {
 
 .info-items {
     margin-bottom: 2rem;
+    width: 100%;
 }
 
 .info-item {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
+    width: 100%;
 }
 
 .info-item i {
@@ -1231,11 +1263,17 @@ body.terminal-mode .stat-icon::after {
     justify-content: center;
     margin-right: 1rem;
     color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+.info-item .info-text {
+    word-break: break-word;
 }
 
 .social-links {
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .social-link {
@@ -1261,11 +1299,13 @@ body.terminal-mode .stat-icon::after {
     border-radius: 8px;
     padding: 2rem;
     position: relative;
+    width: 100%;
 }
 
 .form-group {
     position: relative;
     margin-bottom: 2rem;
+    width: 100%;
 }
 
 .form-group input,
@@ -1314,6 +1354,28 @@ body.terminal-mode .stat-icon::after {
     left: 0;
     font-size: 0.8rem;
     color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .contact-container {
+        gap: 2rem;
+    }
+    
+    .contact-form {
+        padding: 1.5rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .info-item {
+        align-items: flex-start;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
 }
 
 .submit-btn {
@@ -1407,20 +1469,40 @@ footer {
     .contact-container {
         grid-template-columns: 1fr;
     }
+    
+    .projects-container {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
 }
 
 @media (max-width: 768px) {
+    nav {
+        padding: 0.5rem 1rem;
+        width: calc(100% - 2rem);
+    }
+    
     .nav-links {
         position: fixed;
         top: 0;
         right: -100%;
         height: 100vh;
-        width: 70%;
+        width: 75%;
         background-color: var(--darker-bg);
         flex-direction: column;
         justify-content: center;
         align-items: center;
         transition: right 0.3s ease;
+        z-index: 1000;
+        gap: 1.5rem;
+        padding: 5rem 2rem 2rem;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .nav-links a {
+        font-size: 1rem;
+        padding: 0.5rem 0;
+        width: 100%;
+        text-align: center;
     }
     
     .nav-links.active {
@@ -1429,7 +1511,8 @@ footer {
     
     .hamburger {
         display: block;
-        z-index: 1001;
+        position: relative;
+        z-index: 1010;
     }
     
     .hamburger.active span:nth-child(1) {
@@ -1470,6 +1553,25 @@ footer {
     .btn {
         width: 100%;
         margin-bottom: 0.5rem;
+    }
+    
+    .projects-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .project-card {
+        padding: 1.5rem;
+        width: 100%;
+    }
+    
+    .project-tech {
+        gap: 0.3rem;
+    }
+    
+    .tech-tag {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.6rem;
     }
 }
 
@@ -1516,6 +1618,27 @@ footer {
     
     .info-item i {
         margin-bottom: 0.5rem;
+    }
+    
+    /* Additional fixes for smallest screens */
+    .project-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .project-links {
+        margin-top: 0.5rem;
+    }
+    
+    .stat-item {
+        margin: 0.3rem;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        padding: 0.8rem;
+        font-size: 0.9rem;
     }
 }
 
@@ -2337,7 +2460,7 @@ body.cursor-lock .custom-cursor {
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    z-index: 1000;
+    z-index: 1001;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
@@ -2688,13 +2811,25 @@ body.demo-open {
 /* Position for mobile devices */
 @media (max-width: 768px) {
     .theme-toggle {
-        top: 1.5rem;
-        right: 5rem;
+        top: 1rem;
+        right: 4rem;
+        z-index: 1010;
+        width: 50px;
+        height: 26px;
+        box-shadow: 0 0 8px rgba(0, 180, 216, 0.2);
+        background-color: var(--darker-bg);
+    }
+    
+    body.light-theme .theme-toggle {
+        background-color: var(--lighter-bg);
+        box-shadow: 0 0 8px rgba(0, 119, 182, 0.2);
     }
     
     .terminal-mode-toggle {
-        bottom: 2rem;
-        right: 2rem;
+        top: 1rem;
+        right: 7rem;
+        margin-right: 0.5rem;
+        z-index: 1010;
     }
 }
 
@@ -3245,6 +3380,7 @@ body.terminal-mode .network-node {
     .cyber-dashboard {
         max-width: 400px;
         height: 450px;
+        margin: 0 auto;
     }
     
     .metric-item {
@@ -3265,6 +3401,7 @@ body.terminal-mode .network-node {
     .cyber-dashboard {
         max-width: 320px;
         height: 480px;
+        margin: 0 auto;
     }
     
     .security-metrics {
@@ -3310,6 +3447,44 @@ body.terminal-mode .network-node {
     .activity-log {
         max-height: 180px;
     }
+    
+    /* Additional dashboard fixes */
+    .dashboard-controls {
+        gap: 5px;
+        padding: 0 5px;
+    }
+    
+    .control-button {
+        font-size: 0.75rem;
+        padding: 5px 8px;
+    }
+    
+    .network-visualization {
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .metric-ring {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .metric-value {
+        font-size: 1.2rem;
+    }
+    
+    .metrics-rows {
+        grid-template-columns: 1fr;
+    }
+    
+    .dashboard-title {
+        font-size: 1rem;
+    }
+    
+    .status-right {
+        display: none;
+    }
 }
 
 /* Dashboard Views */
@@ -3345,7 +3520,7 @@ body.terminal-mode .network-node {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTA4LDE3OGMxMC4yLDAuNiwyMy40LDEuNiwzMC0zYzMuOC0yLjYsNi44LTExLjQsOC0xNmMyLTcuNiw1LjQtMjMuOCw0LTMyYy0wLjgtNC44LTIuOC03LjItNy0xMGMtNC0yLjgtOC40LTMuNC0xMy01Yy01LjgtMiwyLjQtNy42LTQtMTFjLTcuNi00LTEyLjYtMS44LTE5LTljLTMuNi00LTUuOC04LjYtOS0xM2MtMy40LTQuNi02LjYtNi4yLTEyLThjLTYuOC0yLjItMTcuMi01LjQtMjQtNGMtNC44LDEtOC40LDIuOC0xMiw2Yy01LDQuNC05LDEwLjYtMTIsMTdjLTMuOCw4LjQtMy40LDEzLTcsMjJjLTIuNCw2LjItNywxMS44LTgsMTljLTEuMiw5LDEuOCwyMC40LDcsMjhjNi4yLDguOCwxMS44LDExLjQsMjIsMTRjNy4yLDEuOCwyMC44LDQuOCwyOCw0QzgzLjQsMTc2LjgsOTkuNCwxNzcuNCwxMDgsMTc4eiIgZmlsbD0icmdiYSgwLDIwMCwyNTUsMC4yKSIvPjxwYXRoIGQ9Ik0zMjIsMTQ5YzUuNCwwLjgsMTEuOCwzLjQsMTcsM2M2LjgtMC40LDEzLTguNiwxOC0xM2MzLjgtMy40LDguMi03LjYsMTItMTJjNC4yLTUsOC44LTEwLjgsMTItMTdjMy0xMS44LDcuMi04LjgsMTYtMTdjNi40LTYsNS4yLTExLjQsMTMtMTZjNi44LTQsOS4yLTYuNCwxMi0xNGMzLjQtOS4yLDQuNi0xMC40LDEzLTE2YzUuOC0zLjgsMTIuNC01LjIsMTktOGM4LjQtMy42LDE1LjYtOC40LDI0LTExYzctMi4yLDE1LTMuNCwyMi02YzcuMi0yLjgsMTIuOC0xMCwyMC0xM2M3LjgtMy4yLDE2LjgtMy44LDI1LTdjOC4yLTMuNCwxNi42LTExLjYsMjQtMTVjMi44LDQuNiw1LjIsOS42LDgsOWMyLjYtMC42LDctNy4yLDktOWMyLjQtMi4yLDYuOC0zLjQsNy00YzEuOC00LjYsMy44LTkuNCw1LTE0YzIuNC04LjgsMy4yLTE5LDYtMjdjMi4yLTYuMiw2LjgtMTIuNiwxMC0xOGMxNC44LDIsMTYsMTYuNiwzMSwxOS40TDY2MCwwSDQzMFYyOGgtMTZhODguNyw4OC43LDAsMCwwLDksMTJjLTUuMiw2LjItOS4yLDEyLjgtMTIsMjFjLTMuOCwxMS41LTQuNSwyMi44LTYsMzVjLTEuOCwxMy4zLTUuNCwyNC42LTEwLDM3Yy0zLjYsMTAuMS0xMCwxOC4yLTE2LDI3Yy03LjQsMTEuMy0xMy42LDIyLjYtMjMsMzJjLTEyLDEyLTI1LjUsMTYuNi00MiwyM2MtMTAuNiw0LjEtMjMuNiw4LTMzLDEzQTEyNi42LDEyNi42LDAsMCwwLDI1NiwyNDRjLTUuOCw3LTEzLjYsMTUuNi0xNiwyNWMtMiw3LjctMS4yLDE2LjEtMiwxNWMtNCw3LjQtOS41LDE1LjgtMTcsMjBjLTkuNCw1LjQtMjMsMi45LTM0LDRjLTguNCwwLjktMTYuNSw1LjQtMjUsMTBjLTExLjEsNi4xLTIxLDQuMi0zMywzLTUuMy0wLjUtOC41LDIuMS0xNCwxYy02LjUtMS4zLTEzLjktNi40LTIwLTljLTguOS0zLjktMTkuMi03LjMtMjktMTJDNTcuMSwyOTYuNyw1MC40LDI5MCw0MywyODJjLTYuMi02LjctOS44LTE3LTE0LTI2Yy0zLjctNy44LTkuOS0xNi4xLTExLTI1Yy0xLTkuNy0wLjMtMTcuOCwxLTI4YzIuNy0yMC45LDAuNy00Mi01LTYyYzctMy4xLDE0LjgtNC4xLDIzLTVjMTcuMS0xLjgsMzIuOC01LjUsNDktMTBjMTUuMi00LjMsMjkuOS0xMC42LDQ0LTE3YzEyLjUtNS43LDIxLjktMTMuMiwyNy0yM2MtNS43LTkuMi0xMi4zLTE3LjktMTYtMjlDMTM2LjMsNDMuOCwxMzQuOCwyOS4yLDEzOCwxMmM4LjgsMS45LDE3LjYsNC4xLDI2LDZjMTQuNSwzLjMsMjMuNyw3LjYsMzYsMTVjMTMuNyw4LjIsMjUuOSw5LjIsMzksNmM3LjQtMS44LDE0LjQtNS43LDIxLTljNi0zLDEzLjQtMTAsMjAtMTNWMGgtNDRsMC45LDEuMkMxOTQsMTcuNywxNjMsMTcuNCwxMjQsMzQuOEwxMDEsNDVjMCw5LjUtMC4yLDE4LjUsMiwyOGMzLjQsMTQuOCw5LjUsMjcuNSwxNSw0MWM0LjQsMTAuOCwxMC40LDI1LjYsMTgsMzRjNi43LDcuNSwxNS44LDEwLjEsMjQsMTUiIGZpbGw9InJnYmEoMCwyMDAsMjU1LDAuMikiLz48L3N2Zz4=');
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTA4LDE3OGMxMC4yLDAuNiwyMy40LDEuNiwzMC0zYzMuOC0yLjYsNi44LTExLjQsOC0xNmMyLTcuNiw1LjQtMjMuOCw0LTMyYy0wLjgtNC44LTIuOC03LjItNy0xMGMtNC0yLjgtOC40LTMuNC0xMy01Yy01LjgtMiwyLjQtNy42LTQtMTFjLTcuNi00LTEyLjYtMS44LTE5LTljLTMuNi00LTUuOC04LjYtOS0xM2MtMy40LTQuNi02LjYtNi4yLTEyLThjLTYuOC0yLjItMTcuMi01LjQtMjQtNGMtNC44LDEtOC40LDIuOC0xMiw2Yy01LDQuNC05LDEwLjYtMTIsMTdjLTMuOCw4LjQtMy40LDEzLTcsMjJjLTIuNCw2LjItNywxMS44LTgsMTljLTEuMiw5LDEuOCwyMC40LDcsMjhjNi4yLDguOCwxMS44LDExLjQsMjIsMTRjNy4yLDEuOCwyMC44LDQuOCwyOCw0QzgzLjQsMTc2LjgsOTkuNCwxNzcuNCwxMDgsMTc4eiIgZmlsbD0icmdiYSgwLDIwMCwyNTUsMC4yKSIvPjxwYXRoIGQ9Ik0zMjIsMTQ5YzUuNCwwLjgsMTEuOCwzLjQsMTcsM2M2LjgtMC40LDEzLTguNiwxOC0xM2MzLjgtMy40LDguMi03LjYsMTItMTJjNC4yLTUsOC44LTEwLjgsMTItMTdjMy0xMS44LDcuMi04LjgsMTYtMTdjNi40LTYsNS4yLTExLjQsMTMtMTZjNi44LTQsOS4yLTYuNCwxMi0xNGMzLjQtOS4yLDQuNi0xMC40LDEzLTE2YzUuOC0zLjgsMTIuNC01LjIsMTktOGM4LjQtMy42LDE1LjYtOC40LDI0LTExYzctMi4yLDE1LTMuNCwyMi02YzcuMi0yLjgsMTIuOC0xMCwyMC0xM2M3LjgtMy4yLDE2LjgtMy44LDI1LTdjOC4yLTMuNCwxNi42LTExLjYsMjQtMTVjMi44LDQuNiw1LjIsOS42LDgsOWMyLjYtMC42LDctNy4yLDktOWMyLjQtMi4yLDYuOC0zLjQsNy00YzEuOC00LjYsMy44LTkuNCw1LTE0YzIuNC04LjgsMy4yLTE5LDYtMjdjMi4yLTYuMiw2LjgtMTIuNiwxMC0xOGMxNC44LDIsMTYsMTYuNiwzMSwxOS40TDY2MCwwSDQzMFYyOGgtMTZhODguNyw4OC43LDAsMCwwLDksMTJjLTUuMiw2LjItOS4yLDEyLjgtMTIsMjFjLTMuOCwxMS41LTQuNSwyMi44LTYsMzVjLTEuOCwxMy4zLTUuNCwyNC42LTEwLDM3Yy0zLjYsMTAuMS0xMCwxOC4yLTE2LDI3Yy03LjQsMTEuMy0xMy42LDIyLjYtMjMsMzJjLTEyLDEyLTI1LjUsMTYuNi00MiwyM2MtMTAuNiw0LjEtMjMuNiw4LTMzLDEzQTEyNi42LDEyNi42LDAsMCwwLDI1NiwyNDRjLTUuOCw3LTEzLjYsMTUuNi0xNiwyNWMtMiw3LjctMS4yLDE2LjEtMiwxNWMtNCw3LjQtOS41LDE1LjgtMTcsMjBjLTkuNCw1LjQtMjMsMi45LTM0LDRjLTguNCwwLjktMTYuNSw1LjQtMjUsMTBjLTExLjEsNi4xLTIxLDQuMi0zMywzLTUuMy0wLjUtOC41LDIuMS0xNCwxYy02LjUtMS4zLTEzLjktNi40LTIwLTljLTguOS0zLjktMTkuMi03LjMtMjktMTJDNTcuMSwyOTYuNyw1MC40LDI5MCw0MywyODJjLTYuMi02LjctOS44LTE3LTE0LTI2Yy0zLjctNy44LTkuOS0xNi4xLTExLTI1Yy0xLTkuNy0wLjMtMTcuOCwxLTI4YzIuNy0yMC45LDAuNy00Mi01LTYyYzctMy4xLDE0LjgtNC4xLDIzLTVjMTcuMS0xLjgsMzIuOC01LjUsNDktMTBjMTUuMi00LjMsMjk5LTEwLjYsNDQtMTdjMTIuNS01LjcsMjEuOS0xMy4yLDI3LTIzYy01LjctOS4yLTEyLjMtMTcuOS0xNi0yOUMxMzYuMyw0My44LDEzNC44LDI5LjIsMTM4LDEyYzguOCwxLjksMTcuNiwyLjksMjYsNmMxNC41LDMuMywyMy43LDcuNiwzNiwxNWMxMy43LDguMiwyNS45LDkuMiwzOSw2YzcuNC0xLjgsMTQuNC01LjcsMjEtOWM2LTMuOCwxMy40LTEwLDIwLTEzVjBIMTQ0bDAuOSwxLjJDMTk0LDE3LjcsMTYzLDE3LjQsMTI0LDM0LjhsMTAxLDEwLjVDMTQ0LDEwNSwxNDQsMTA1LDE0NCwxMDVjMCw5LjUtMC4yLDE4LjUsMiwyOGMzLjQsMTQuOCw5LjUsMjcuNSwxNSw0MWM0LjQsMTAuOCwxMC40LDI1LjYsMTgsMzRjNi43LDcuNSwxNS44LDEwLjEsMjQsMTUiIGZpbGw9InJnYmEoMCwyMDAsMjU1LDAuMikiLz48L3N2Zz4=');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -4036,9 +4211,7 @@ body.terminal-mode .status-value {
     }
     
     .click-counter {
-        top: 10px;
-        left: 10px;
-        font-size: 0.7rem;
+        display: none !important;
     }
 }
 
@@ -4327,4 +4500,544 @@ body.terminal-mode .security-alert.critical .click-count {
     visibility: hidden !important;
     opacity: 0 !important;
     pointer-events: none !important;
+}
+
+/* Add fix for hamburger menu z-index */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 1010;
+}
+
+/* Mobile Responsiveness Fixes */
+@media (max-width: 768px) {
+    /* Cursor adjustments for mobile */
+    .custom-cursor {
+        display: none;
+    }
+    
+    /* Re-enable default cursor on mobile */
+    html body.js-cursor-active,
+    html body.js-cursor-active *,
+    html body.js-cursor-active *:hover,
+    html body.js-cursor-active *:active,
+    html body.js-cursor-active *:focus,
+    html body.js-cursor-active *:before,
+    html body.js-cursor-active *:after,
+    html body.js-cursor-active a,
+    html body.js-cursor-active button,
+    html body.js-cursor-active input,
+    html body.js-cursor-active select,
+    html body.js-cursor-active textarea,
+    html body.js-cursor-active [role="button"],
+    html body.js-cursor-active .clickable {
+        cursor: auto !important;
+    }
+    
+    /* Navigation improvements */
+    .nav-links {
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        width: 80%;
+    }
+    
+    /* Ensure hamburger button remains on top */
+    .hamburger {
+        position: relative;
+        z-index: 1010;
+    }
+    
+    /* Prevent content overlap when mobile menu is open */
+    body.menu-open {
+        overflow: hidden;
+    }
+    
+    /* Fix section padding for mobile */
+    section {
+        padding: 3rem 0;
+    }
+    
+    /* Fix font sizes for mobile */
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    /* Fix project card display */
+    .project-card {
+        margin-bottom: 0;
+    }
+    
+    /* Make sure buttons are properly sized */
+    .btn, .submit-btn {
+        padding: 0.7rem 1.2rem;
+    }
+    
+    /* Adjust contact form */
+    .form-group label {
+        font-size: 0.9rem;
+    }
+    
+    /* Center main content elements */
+    .container {
+        padding: 0 1rem;
+    }
+    
+    /* Fix logo position */
+    .logo {
+        font-size: 1.2rem;
+    }
+    
+    /* Prevent overflow of main elements */
+    .grid-container, 
+    .skills-container, 
+    .projects-container, 
+    .contact-container {
+        overflow-x: hidden;
+        width: 100%;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    /* Stack the navigation more cleanly */
+    .nav-links {
+        width: 85%;
+        padding: 1.5rem;
+    }
+    
+    .nav-links a {
+        padding: 0.8rem 0;
+    }
+    
+    /* Further reduce font size */
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    /* Improve section headers */
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    /* Better padding for project cards */
+    .project-card {
+        padding: 1.2rem;
+    }
+    
+    /* Improve terminal display */
+    .terminal {
+        max-width: 100%;
+        min-height: 300px;
+    }
+    
+    .terminal-body {
+        height: 250px;
+    }
+    
+    /* Make social links more touchable */
+    .social-link {
+        width: 45px;
+        height: 45px;
+    }
+    
+    /* Fix theme toggle position */
+    .theme-toggle {
+        top: 1rem;
+        right: 4.5rem;
+        width: 45px;
+        height: 24px;
+    }
+    
+    /* Adjust terminal mode toggle */
+    .terminal-mode-toggle {
+        top: 1rem;
+        right: 8rem;
+    }
+    
+    /* Stack all grid elements */
+    .tools-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Fix global max-width for content */
+    .container {
+        max-width: 100%;
+        padding: 0 0.8rem;
+    }
+}
+
+/* Fix for modal z-index to stay above navigation */
+.cipherize-modal {
+    z-index: 9999;
+}
+
+/* Fix for black hole animation to stay above everything */
+.black-hole-container {
+    z-index: 10000;
+}
+
+/* Mobile Responsiveness Fixes */
+@media (max-width: 768px) {
+    /* Re-add any missing rules */
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    /* Further improvements for small screens */
+    nav {
+        padding: 0.5rem 0.8rem;
+        width: calc(100% - 1.6rem);
+    }
+    
+    .nav-links {
+        width: 85%;
+        padding: 4.5rem 1.5rem 2rem;
+    }
+    
+    .theme-toggle {
+        right: 3.5rem;
+        width: 42px;
+        height: 22px;
+        top: 0.8rem;
+    }
+    
+    .terminal-mode-toggle {
+        right: 6.5rem;
+        transform: scale(0.9);
+        top: 0.8rem;
+    }
+    
+    .project-card {
+        padding: 1.2rem;
+    }
+    
+    /* Ensure the hamburger is visible */
+    .hamburger span {
+        height: 2px;
+        width: 22px;
+    }
+    
+    /* Center align content */
+    .container {
+        padding: 0 0.8rem;
+        width: calc(100% - 1.6rem);
+    }
+    
+    /* Fix skill icons to fit in small screens */
+    .skill-icon {
+        width: 45px;
+        height: 45px;
+    }
+    
+    /* Fix form inputs for better touch */
+    .form-group input,
+    .form-group textarea {
+        font-size: 16px; /* Prevent iOS zoom on focus */
+        padding: 0.8rem;
+    }
+    
+    /* Improve the hero section display */
+    .hero {
+        height: auto;
+        padding-top: 5rem;
+        padding-bottom: 3rem;
+    }
+    
+    /* Better terminal experience on small screens */
+    .terminal {
+        min-height: 280px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .terminal-body {
+        height: 230px;
+    }
+    
+    /* Make buttons more touchable */
+    .social-link, 
+    .project-link,
+    .btn,
+    .form-group input,
+    .form-group textarea {
+        min-height: 44px; /* Apple recommended touch target size */
+    }
+    
+    .social-links {
+        gap: 0.8rem;
+    }
+    
+    /* Fix header text */
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Extra small phones */
+@media (max-width: 360px) {
+    .theme-toggle {
+        right: 3rem;
+        transform: scale(0.8);
+    }
+    
+    .terminal-mode-toggle {
+        right: 5.5rem;
+        transform: scale(0.8);
+    }
+    
+    .project-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .project-card {
+        padding: 1rem;
+    }
+    
+    .skill-category {
+        padding: 1.5rem 1rem;
+    }
+    
+    .logo {
+        font-size: 1rem;
+    }
+    
+    /* Reduce padding for very small screens */
+    section {
+        padding: 3rem 0 2rem;
+    }
+    
+    .container {
+        padding: 0 0.6rem;
+        width: calc(100% - 1.2rem);
+    }
+}
+
+/* Additional responsive navigation enhancements */
+@media (max-width: 768px) {
+    /* Fix project grid to be one column with consistent sizing */
+    .projects-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    /* Ensure sections have adequate spacing */
+    section {
+        padding: 4rem 0;
+        margin-bottom: 1rem;
+    }
+    
+    /* Fix nav menu spacing */
+    .nav-links a {
+        margin: 0.5rem 0;
+        font-size: 1.1rem;
+    }
+    
+    /* Animate mobile menu slide-in */
+    .nav-links {
+        transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    /* Add overlay when menu is open */
+    body.menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    /* Improve heading visibility */
+    .section-header h2 {
+        font-size: 2.2rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    /* Better padding for project cards */
+    .project-card {
+        padding: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Increase touch targets */
+    .project-link {
+        font-size: 1.4rem;
+        padding: 0.3rem;
+    }
+    
+    /* Fix any overlapping elements */
+    .hero-content {
+        margin-top: 1rem;
+    }
+}
+
+/* Small/medium device touchups */
+@media (min-width: 481px) and (max-width: 768px) {
+    /* Adjust projects to 2 columns for small tablets */
+    .projects-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.2rem;
+    }
+    
+    /* Adjust font sizes for better readability on tablets */
+    .hero h1 {
+        font-size: 2.8rem;
+    }
+    
+    .section-header h2 {
+        font-size: 2.3rem;
+    }
+}
+
+/* Mobile-specific name container styling - ONLY for mobile screens */
+@media (max-width: 768px) {
+    #name-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin: 1rem 0;
+    }
+    
+    .fullname {
+        display: block;
+        width: 100%;
+    }
+    
+    .first-line {
+        display: block;
+        white-space: nowrap;
+        margin-bottom: 0.3rem;
+    }
+    
+    .second-line {
+        display: block;
+        white-space: nowrap;
+        padding-left: 40%;
+        margin-top: 0.3rem;
+    }
+    
+    .hero h1 {
+        font-size: 2.8rem;
+        line-height: 1.2;
+    }
+}
+
+@media (max-width: 480px) {
+    #name-container {
+        margin: 0.5rem 0;
+    }
+    
+    .second-line {
+        padding-left: 35%;
+    }
+    
+    .hero h1 {
+        font-size: 2.4rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .second-line {
+        padding-left: 30%;
+    }
+    
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Previously existing code */
+    
+    #name-container {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    .fullname {
+        font-size: 2.5rem;
+        line-height: 1.2;
+    }
+    
+    .first-line {
+        display: block;
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+    
+    .second-line {
+        display: block;
+        padding-left: 1.5rem;
+    }
+    
+    .grain-letter {
+        transition: transform 0.25s ease, color 0.25s ease;
+    }
+    
+    .grain-letter:hover {
+        transform: translateY(-2px) scale(1.03);
+        text-shadow: 0 0 8px rgba(0, 180, 216, 0.3);
+    }
+}
+
+@media (max-width: 480px) {
+    /* Previously existing code */
+    
+    .fullname {
+        font-size: 2rem;
+    }
+    
+    .second-line {
+        padding-left: 1rem;
+    }
+    
+    #name-container {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .theme-toggle {
+        top: 0.8rem;
+        right: 3.8rem;
+        width: 45px;
+        height: 24px;
+        background-color: var(--darker-bg);
+        box-shadow: 0 0 8px rgba(0, 180, 216, 0.2);
+    }
+    
+    body.light-theme .theme-toggle {
+        background-color: var(--lighter-bg);
+        box-shadow: 0 0 8px rgba(0, 119, 182, 0.2);
+    }
+    
+    .terminal-mode-toggle {
+        top: 0.8rem;
+        right: 6.5rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .theme-toggle {
+        top: 0.7rem;
+        right: 3.5rem;
+        width: 40px;
+        height: 22px;
+    }
+    
+    .terminal-mode-toggle {
+        top: 0.7rem;
+        right: 6rem;
+    }
 }

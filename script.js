@@ -176,6 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             navLinks.classList.toggle('active');
+            document.body.classList.toggle('menu-open'); // Add/remove menu-open class on body
         });
     }
     
@@ -184,6 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
         item.addEventListener('click', () => {
             hamburger.classList.remove('active');
             navLinks.classList.remove('active');
+            document.body.classList.remove('menu-open'); // Remove menu-open class
             
             // Update active link
             navLinksItems.forEach(link => link.classList.remove('active'));
@@ -218,7 +220,22 @@ document.addEventListener('DOMContentLoaded', function() {
     if (hexagonGrid) {
         const gridWidth = hexagonGrid.offsetWidth;
         const gridHeight = hexagonGrid.offsetHeight;
-        const hexCount = 15; // Number of hexagons to create
+        
+        // Adjust hexagon count based on screen size
+        let hexCount = 15; // Default for desktop
+        
+        // Reduce count for smaller screens
+        if (window.innerWidth <= 768) {
+            hexCount = 10;
+        }
+        if (window.innerWidth <= 480) {
+            hexCount = 6;
+        }
+        
+        // Clear any existing hexagons first (for window resize)
+        while (hexagonGrid.firstChild) {
+            hexagonGrid.removeChild(hexagonGrid.firstChild);
+        }
         
         for (let i = 0; i < hexCount; i++) {
             const hexagon = document.createElement('div');
@@ -228,8 +245,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const posX = Math.random() * gridWidth;
             const posY = Math.random() * gridHeight;
             
-            // Random size between 40px and 80px
-            const size = Math.random() * 40 + 40;
+            // Adjust size based on screen width
+            let maxSize = 80;
+            let minSize = 40;
+            
+            if (window.innerWidth <= 768) {
+                maxSize = 70;
+                minSize = 35;
+            }
+            if (window.innerWidth <= 480) {
+                maxSize = 50;
+                minSize = 30;
+            }
+            
+            // Random size between minSize and maxSize
+            const size = Math.random() * (maxSize - minSize) + minSize;
             
             // Random opacity
             const opacity = Math.random() * 0.08 + 0.02;
@@ -246,6 +276,64 @@ document.addEventListener('DOMContentLoaded', function() {
             
             hexagonGrid.appendChild(hexagon);
         }
+        
+        // Recalculate on window resize
+        window.addEventListener('resize', () => {
+            // Debounce to avoid excessive recalculation
+            clearTimeout(window.resizeTimer);
+            window.resizeTimer = setTimeout(() => {
+                const gridWidth = hexagonGrid.offsetWidth;
+                const gridHeight = hexagonGrid.offsetHeight;
+                
+                // Adjust hexagon count and sizes based on screen size
+                let hexCount = 15;
+                if (window.innerWidth <= 768) {
+                    hexCount = 10;
+                }
+                if (window.innerWidth <= 480) {
+                    hexCount = 6;
+                }
+                
+                // Clear existing hexagons
+                while (hexagonGrid.firstChild) {
+                    hexagonGrid.removeChild(hexagonGrid.firstChild);
+                }
+                
+                // Recreate hexagons
+                for (let i = 0; i < hexCount; i++) {
+                    const hexagon = document.createElement('div');
+                    hexagon.classList.add('hexagon');
+                    
+                    const posX = Math.random() * gridWidth;
+                    const posY = Math.random() * gridHeight;
+                    
+                    let maxSize = 80;
+                    let minSize = 40;
+                    
+                    if (window.innerWidth <= 768) {
+                        maxSize = 70;
+                        minSize = 35;
+                    }
+                    if (window.innerWidth <= 480) {
+                        maxSize = 50;
+                        minSize = 30;
+                    }
+                    
+                    const size = Math.random() * (maxSize - minSize) + minSize;
+                    const opacity = Math.random() * 0.08 + 0.02;
+                    const delay = Math.random() * 5;
+                    
+                    hexagon.style.left = `${posX}px`;
+                    hexagon.style.top = `${posY}px`;
+                    hexagon.style.width = `${size}px`;
+                    hexagon.style.height = `${size}px`;
+                    hexagon.style.backgroundColor = `rgba(0, 180, 216, ${opacity})`;
+                    hexagon.style.animationDelay = `${delay}s`;
+                    
+                    hexagonGrid.appendChild(hexagon);
+                }
+            }, 250); // Wait 250ms after resize ends
+        });
     }
     
     // Contact Form Functionality
