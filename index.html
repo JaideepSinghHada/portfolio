@@ -59,7 +59,7 @@
         
         /* Contact section spacing adjustment */
         .contact {
-            padding-bottom: 20px;
+            padding-bottom: 3rem !important;
         }
         
         /* Enhanced Footer Styles */
@@ -582,6 +582,20 @@
         .black-hole-container.consume-all .cursor-blocker {
             display: block;
         }
+        
+        /* Custom spacing fixes */
+        #contact.contact {
+            padding-bottom: 3rem !important;
+        }
+        
+        #certificates.certificates {
+            padding-top: 3rem !important;
+            padding-bottom: 3rem !important;
+        }
+        
+        footer {
+            margin-top: 0 !important;
+        }
     </style>
     
     <!-- Mobile and Responsive Design -->
@@ -817,11 +831,12 @@
                 <a href="#home"><span class="bracket">{</span> JSH <span class="bracket">}</span></a>
             </div>
             <ul class="nav-links">
-                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="#certificates">Certificates</a></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -1209,6 +1224,25 @@
             </div>
         </section>
         
+        <!-- Certificates Section -->
+        <section id="certificates" class="certificates">
+            <div class="section-header">
+                <h2>My <span class="accent">Certificates</span></h2>
+                <div class="underline"></div>
+            </div>
+            <div class="certificates-container">
+                <div class="certificate-card">
+                    <div class="certificate-logo">
+                        <img src="Edureka.png" alt="Edureka Logo">
+                    </div>
+                    <h3>Cybersecurity Certification</h3>
+                    <button class="view-certificate-btn" data-certificate="Certificate_1.png">
+                        View Certificate <i class="fas fa-external-link-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+        
         <!-- Footer -->
         <footer>
             <div class="cyber-separator"></div>
@@ -1227,6 +1261,7 @@
                             <a href="#skills">Skills</a>
                             <a href="#projects">Projects</a>
                             <a href="#contact">Contact</a>
+                            <a href="#certificates">Certificates</a>
                             <a href="#" id="cipherizeBtn" class="secret-btn" title="Site options"><i class="fas fa-cog"></i></a>
                         </div>
                     </div>
@@ -1263,6 +1298,18 @@
             </div>
             <div class="demo-body" id="demoBody">
                 <!-- Demo content will be added by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Certificate Modal -->
+    <div class="certificate-modal" id="certificateModal">
+        <div class="certificate-content">
+            <span class="close-certificate">&times;</span>
+            <div class="certificate-body">
+                <div class="certificate-image-container">
+                    <img id="certificateImage" src="" alt="Certificate">
+                </div>
             </div>
         </div>
     </div>
@@ -1665,6 +1712,33 @@
                 });
             }
         };
+    </script>
+
+    <!-- Cursor hider from previous section -->
+    
+    <script>
+        // Debug script for certificate modal
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Certificate modal debug:');
+            const certificateModal = document.getElementById('certificateModal');
+            const viewCertificateButtons = document.querySelectorAll('.view-certificate-btn');
+            const certificateImage = document.getElementById('certificateImage');
+            
+            console.log('Modal element:', certificateModal);
+            console.log('Buttons:', viewCertificateButtons.length);
+            console.log('Image element:', certificateImage);
+            
+            // Test click event
+            viewCertificateButtons.forEach(button => {
+                console.log('Button data-certificate:', button.getAttribute('data-certificate'));
+                button.addEventListener('click', function(e) {
+                    console.log('Button clicked!');
+                    // Testing visibility
+                    certificateModal.style.display = 'flex';
+                    certificateModal.classList.add('show');
+                });
+            });
+        });
     </script>
 </body>
 </html>

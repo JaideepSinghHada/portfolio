@@ -1190,6 +1190,63 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Click counter security feature
     initializeClickCounter();
+
+    // Certificate Modal Functionality
+    const certificateModal = document.getElementById('certificateModal');
+    const viewCertificateButtons = document.querySelectorAll('.view-certificate-btn');
+    const closeCertificate = document.querySelector('.close-certificate');
+    const certificateImage = document.getElementById('certificateImage');
+    
+    // Open certificate modal with smooth animation
+    viewCertificateButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const certificateSrc = this.getAttribute('data-certificate');
+            console.log('Certificate clicked:', certificateSrc);
+            
+            if (certificateImage) {
+                certificateImage.src = certificateSrc;
+                
+                // Show modal with animation
+                certificateModal.style.display = 'flex';
+                setTimeout(() => {
+                    certificateModal.classList.add('show');
+                }, 50);
+                
+                // Prevent body scrolling
+                document.body.style.overflow = 'hidden';
+            } else {
+                console.error('Certificate image element not found');
+            }
+        });
+    });
+    
+    // Close certificate modal with smooth exit animation
+    function closeModal() {
+        certificateModal.classList.remove('show');
+        setTimeout(() => {
+            certificateModal.style.display = 'none';
+            document.body.style.overflow = '';
+        }, 400); // Match the transition duration in CSS
+    }
+    
+    // Close on X button click
+    if (closeCertificate) {
+        closeCertificate.addEventListener('click', closeModal);
+    }
+    
+    // Close on click outside the certificate
+    certificateModal.addEventListener('click', function(e) {
+        if (e.target === certificateModal) {
+            closeModal();
+        }
+    });
+    
+    // Close on Escape key press
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && certificateModal.classList.contains('show')) {
+            closeModal();
+        }
+    });
 });
 
 function initializeNameEffect() {
@@ -2343,7 +2400,10 @@ function initializeClickCounter() {
     const clickThreshold = 20;
     const criticalThreshold = 50;
     const systemFailureThreshold = 100;
-    let alertShown = false;
+    
+    // Track whether alerts have been shown
+    let alertShown = localStorage.getItem('alertShown') === 'true';
+    let criticalAlertShown = localStorage.getItem('criticalAlertShown') === 'true';
     let alertTimeout;
     
     // If we already passed the critical threshold in a previous session, no notifications
@@ -2523,8 +2583,10 @@ function initializeClickCounter() {
     
     // Add refresh button functionality
     systemFailure.querySelector('.refresh-system-btn').addEventListener('click', function() {
-        // Reset click counter
+        // Reset click counter and alert flags
         localStorage.setItem('clickCount', '0');
+        localStorage.setItem('alertShown', 'false');
+        localStorage.setItem('criticalAlertShown', 'false');
         // Refresh the page
         window.location.reload();
     });
@@ -2546,9 +2608,6 @@ function initializeClickCounter() {
     // Close button functionality
     securityAlert.querySelector('.alert-close').addEventListener('click', function() {
         securityAlert.classList.remove('active');
-        setTimeout(() => {
-            alertShown = false;
-        }, 300);
         clearTimeout(alertTimeout);
     });
     
@@ -2584,16 +2643,19 @@ function initializeClickCounter() {
             return;
         }
         
-        // Show alerts only up to 50 clicks
-        if (clickCount <= criticalThreshold) {
-            // First time reaching critical threshold (exactly at 50)
-            if (clickCount === criticalThreshold) {
-                showCriticalAlert();
-            }
-            // Regular alerts between 20-49 clicks
-            else if (clickCount >= clickThreshold && !alertShown) {
-                showRegularAlert();
-            }
+        // Show critical alert only once when exactly at critical threshold
+        if (clickCount === criticalThreshold && !criticalAlertShown) {
+            showCriticalAlert();
+            criticalAlertShown = true;
+            localStorage.setItem('criticalAlertShown', 'true');
+            return;
+        }
+        
+        // Show regular alert only once when threshold is reached
+        if (clickCount >= clickThreshold && !alertShown) {
+            showRegularAlert();
+            alertShown = true;
+            localStorage.setItem('alertShown', 'true');
         }
     });
     
@@ -2610,15 +2672,10 @@ function initializeClickCounter() {
             securityAlert.classList.add('critical');
             securityAlert.classList.add('active');
             
-            alertShown = true;
-            
             // Reset the timeout
             clearTimeout(alertTimeout);
             alertTimeout = setTimeout(() => {
                 securityAlert.classList.remove('active');
-                setTimeout(() => {
-                    alertShown = false;
-                }, 300);
             }, 7000);
         }, 10);
     }
@@ -2631,15 +2688,10 @@ function initializeClickCounter() {
             updateAlertSeverity();
             securityAlert.classList.add('active');
             
-            alertShown = true;
-            
             // Reset the timeout
             clearTimeout(alertTimeout);
             alertTimeout = setTimeout(() => {
                 securityAlert.classList.remove('active');
-                setTimeout(() => {
-                    alertShown = false;
-                }, 300);
             }, 7000);
         }, 10);
     }
