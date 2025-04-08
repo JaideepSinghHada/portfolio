@@ -5043,62 +5043,92 @@ body.terminal-mode .security-alert.critical .click-count {
 }
 
 /* Certificates Section */
-.certificates-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    width: 100%;
-    margin-top: 2rem;
-}
-
-.certificate-card {
-    position: relative;
+.certificates {
+    padding: 4rem 5%;
+    background-color: var(--bg-color-secondary);
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.certificates-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    max-width: var(--max-width);
+    width: 100%;
+    margin: 2rem auto;
     padding: 2rem;
-    background: transparent;
-    transition: transform 0.3s ease;
+    place-items: center;
+}
+
+.certificate-card {
+    background-color: var(--bg-color);
+    border-radius: 15px;
+    padding: 2.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(var(--accent-rgb), 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 350px;
+    width: 100%;
     max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .certificate-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    border-color: rgba(var(--accent-rgb), 0.3);
 }
 
 .certificate-logo {
-    width: 200px;
-    height: auto;
-    margin-bottom: 1.5rem;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 2rem;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background-color: rgba(var(--accent-rgb), 0.05);
+    border-radius: 10px;
 }
 
 .certificate-logo img {
     max-width: 100%;
-    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.certificate-card:hover .certificate-logo img {
+    transform: scale(1.05);
 }
 
 .certificate-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    text-align: center;
     color: var(--text-color);
+    font-size: 1.3rem;
+    margin: 1.5rem 0;
+    font-weight: 600;
 }
 
 .view-certificate-btn {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.75rem 1.5rem;
     background-color: transparent;
     color: var(--accent-color);
     border: 1px solid var(--accent-color);
-    border-radius: 4px;
-    font-size: 0.9rem;
+    padding: 1rem 2rem;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-top: 1rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: auto;
 }
 
 .view-certificate-btn:hover {
@@ -5107,124 +5137,128 @@ body.terminal-mode .security-alert.critical .click-count {
 }
 
 .view-certificate-btn i {
-    margin-left: 0.5rem;
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.view-certificate-btn:hover i {
+    transform: translateX(3px);
 }
 
 /* Certificate Modal */
 .certificate-modal {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
-    display: none;
-    align-items: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
     justify-content: center;
-    z-index: 9000;
-    opacity: 0;
-    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-    backdrop-filter: blur(5px);
-}
-
-/* Make sure custom cursor stays above modal */
-.custom-cursor {
-    z-index: 10000;
+    align-items: center;
 }
 
 .certificate-modal.show {
-    opacity: 1;
+    display: flex;
 }
 
 .certificate-content {
-    background-color: transparent;
-    width: 90%;
-    max-width: 900px;
-    max-height: 90vh;
-    border-radius: 8px;
     position: relative;
-    animation: modal-appear 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    max-width: 90%;
+    max-height: 90vh;
+    background-color: var(--bg-color);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.close-certificate {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 1001;
+}
+
+.close-certificate:hover {
+    color: var(--accent-color);
 }
 
 .certificate-body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0;
-    width: 100%;
-    height: 100%;
 }
 
 .certificate-image-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
-    transform: scale(0.95);
-    transition: transform 0.3s ease;
-}
-
-.certificate-modal.show .certificate-image-container {
-    transform: scale(1);
+    max-width: 100%;
+    max-height: 80vh;
+    overflow: auto;
 }
 
 .certificate-image-container img {
     max-width: 100%;
-    max-height: 80vh;
-    object-fit: contain;
-    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-    transform: translateY(20px);
-    opacity: 0;
+    height: auto;
+    border-radius: 8px;
 }
 
-.certificate-modal.show .certificate-image-container img {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-.close-certificate {
-    position: absolute;
-    top: -40px;
-    right: 0;
-    color: #fff;
-    font-size: 2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.3);
-    z-index: 10;
-}
-
-.close-certificate:hover {
-    background-color: var(--accent-color);
-    transform: rotate(90deg);
-}
-
-@keyframes modal-appear {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
+/* Responsive Design for Certificates */
 @media (max-width: 768px) {
-    .certificate-content {
-        width: 95%;
+    .certificates {
+        padding: 3rem 5%;
     }
-    
-    .close-certificate {
-        top: -50px;
-        right: 10px;
+
+    .certificates-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 1rem;
+    }
+
+    .certificate-card {
+        padding: 2rem;
+        min-height: 300px;
+    }
+
+    .certificate-logo {
+        width: 120px;
+        height: 120px;
+    }
+
+    .certificate-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .view-certificate-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .certificates {
+        padding: 2rem 5%;
+    }
+
+    .certificate-card {
+        padding: 1.5rem;
+        min-height: 280px;
+    }
+
+    .certificate-logo {
+        width: 100px;
+        height: 100px;
+    }
+
+    .certificate-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .view-certificate-btn {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
     }
 }
