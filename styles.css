@@ -42,7 +42,8 @@ body {
 }
 
 section {
-    padding: 6rem 0;
+    padding: 3rem 0;
+    scroll-margin-top: 80px;
 }
 
 a {
@@ -160,6 +161,7 @@ nav.scrolled {
     padding-top: 9rem;
     position: relative;
     overflow: hidden;
+    scroll-margin-top: 0;
 }
 
 .grid-container {
@@ -755,6 +757,72 @@ body.terminal-mode .grain-letter:hover {
     font-family: var(--code-font);
     font-size: 0.8rem;
     color: var(--accent);
+}
+
+.work-experience {
+    margin-top: 2rem;
+}
+
+.work-experience h3 {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.work-experience h3 i {
+    color: var(--accent);
+}
+
+.work-item {
+    background-color: var(--lighter-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 3px solid var(--accent);
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.work-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(100, 255, 218, 0.1);
+}
+
+.work-item h4 {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.work-item p {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.work-details {
+    margin-top: 1rem;
+    padding-left: 1rem;
+}
+
+.work-details li {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.work-details li::before {
+    content: '▸';
+    color: var(--accent);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
 }
 
 /* About section cyber visualization */
@@ -1572,6 +1640,34 @@ footer {
     .tech-tag {
         font-size: 0.7rem;
         padding: 0.2rem 0.6rem;
+    }
+    
+    .work-experience {
+        margin-top: 1.5rem;
+    }
+    
+    .work-item {
+        padding: 1rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .work-item h4 {
+        font-size: 1rem;
+    }
+    
+    .work-item p {
+        font-size: 0.9rem;
+    }
+    
+    .work-details {
+        margin-top: 0.8rem;
+        padding-left: 0.8rem;
+    }
+    
+    .work-details li {
+        font-size: 0.85rem;
+        margin-bottom: 0.4rem;
+        padding-left: 0.8rem;
     }
 }
 
